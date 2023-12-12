@@ -1,0 +1,14 @@
+CREATE TABLE comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userId INT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+    carId INT NOT NULL,
+    FOREIGN KEY (carId) REFERENCES cars_information(id) ON DELETE CASCADE,
+    starsCount INT NOT NULL,
+    comment TEXT NOT NULL ,
+    datePosted DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- ALTER TABLE comments
+-- ADD datePosted DATETIME DEFAULT CURRENT_TIMESTAMP;
