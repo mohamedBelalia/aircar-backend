@@ -44,15 +44,13 @@
         echo '{"status" : "noId"}';
     }
 
-
-
     function selectCarsIds(PDO $pdo , $id){ //
         $query = "SELECT id FROM carsinformation WHERE agency_ref = :agency_ref ;";
         $statment = $pdo->prepare($query);
         $statment->bindParam(":agency_ref" , $id);
         $statment->execute();
 
-        return  $statment->fetchAll(PDO::FETCH_ASSOC);
+        return  $statment->fetchAll(PDO::FETCH_ASSOC); 
     }
 
 
