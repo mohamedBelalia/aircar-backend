@@ -12,10 +12,11 @@
     $errors = [] ;
 
 
-    if(!empty($_POST["city"]) && !empty($_POST["seats_number"]) && !empty($_POST["brand"]) && !empty($_POST["category"]) &&
+    if(!empty($_POST["city"]) && !empty($_POST["address"]) && !empty($_POST["seats_number"]) && !empty($_POST["brand"]) && !empty($_POST["category"]) &&
     !empty($_POST["model"]) && !empty($_POST["fuel_type"]) && !empty($_POST["transmission"]) && !empty($_POST["price_per_day"]) &&
     !empty($_POST["owner_id"]) && !empty($_POST["color"]) && !empty($_FILES["carImg"]) && !empty($_POST["description"])){
 
+        $address = $_POST["address"] ;
         $city = $_POST["city"] ;
         $seats_number = $_POST["seats_number"];
         $brand = $_POST["brand"];
@@ -50,12 +51,13 @@
                 if(move_uploaded_file($temp_location , $img_destination)){
 
                     
-                    $query = "INSERT INTO carsinformation (adresse,seats_nbr,brand,category,model,fuel_type,color,transmission,price_per_day,img_path,agency_ref,description) 
-                            VALUES (:adresse,:seats_nbr,:brand,:category,:model,:fuel_type,:color,:transmission,:price_per_day,:img_path,:agency_ref,:description);" ;
+                    $query = "INSERT INTO carsinformation (adresse,city,seats_nbr,brand,category,model,fuel_type,color,transmission,price_per_day,img_path,agency_ref,description) 
+                            VALUES (:adresse,:city,:seats_nbr,:brand,:category,:model,:fuel_type,:color,:transmission,:price_per_day,:img_path,:agency_ref,:description);" ;
 
                     $statment = $pdo->prepare($query);
                     
-                    $statment->bindParam(":adresse" , $city);
+                    $statment->bindParam(":adresse" , $address);
+                    $statment->bindParam(":city" , $city);
                     $statment->bindParam(":seats_nbr" , $seats_number);
                     $statment->bindParam(":brand" , $brand);
                     $statment->bindParam(":category" , $category);

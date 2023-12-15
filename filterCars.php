@@ -19,6 +19,7 @@
     $startDate = $carsInfo->startDate ?? false ;
     $endDate = $carsInfo->endDate ?? false ;
     $typeCar = $carsInfo->typeCar ?? false ;
+    $locationRegion = $carsInfo->locationRegion ;
     
     $queryCondition = " 1 " ;
 
@@ -80,8 +81,10 @@
         foreach($ids as $id){
             $queryCondition .= " AND carsinformation.id <> " . $id["carId"] ;
         }
+    }
 
-
+    if(strlen($locationRegion) > 0){
+        $queryCondition .= " AND carsinformation.city = '$locationRegion' ";
     }
     
     $query = "SELECT carsinformation.* , agencies.name FROM carsinformation inner join agencies ON carsinformation.agency_ref = agencies.id WHERE $queryCondition;";

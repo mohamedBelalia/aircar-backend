@@ -12,6 +12,7 @@
 
     $agencyName = $agencyData->agencyName ;
     $agencyAdresse = $agencyData->agencyAdresse ;
+    $agencyCity = $agencyData->agencyCity ;
     $email = $agencyData->email ;
     $pwd = $agencyData->pwd ;
     $phoneNbr = $agencyData->phoneNbr ;
@@ -20,7 +21,7 @@
 
     $errors = [] ;
 
-    if(empty($agencyName) || empty($agencyAdresse) || empty($email) || empty($pwd) || empty($phoneNbr))
+    if(empty($agencyName) || empty($agencyAdresse) || empty($agencyCity) || empty($email) || empty($pwd) || empty($phoneNbr))
     {
         $errors["inputsEmpty"] = "Fill Out All The Fields !" ;
     }
@@ -52,7 +53,7 @@
         $pwd = password_hash($pwd , PASSWORD_DEFAULT);
         $token = md5(uniqid().rand(1000000000, 9999999999) . $email) ;
 
-        $query = "INSERT INTO agencies(name,address,email,phoneNbr,pwd,token) VALUES (:name,:address,:email,:phoneNbr,:pwd,:token);";
+        $query = "INSERT INTO agencies(name,address,email,phoneNbr,pwd,token,cityAgency) VALUES (:name,:address,:email,:phoneNbr,:pwd,:token,:cityAgency);";
         $statmet = $pdo->prepare($query);
 
         $statmet->bindParam(":name" , $agencyName);
@@ -61,6 +62,7 @@
         $statmet->bindParam(":phoneNbr" , $phoneNbr);
         $statmet->bindParam(":pwd" , $pwd);
         $statmet->bindParam(":token" , $token);
+        $statmet->bindParam(":cityAgency" , $agencyCity);
 
         $statmet->execute();
     }
