@@ -1,10 +1,11 @@
 <?php
+namespace Dompdf;
+define('DOMPDF_ENABLE_WEBP', false);
 /**
  * @package dompdf
  * @link    https://github.com/dompdf/dompdf
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
-namespace Dompdf;
 
 use DOMDocument;
 use DOMNode;

@@ -48,7 +48,7 @@
     $pwd = password_hash($pwd , PASSWORD_DEFAULT) ;
     $token = md5(uniqid().rand(1000000000, 9999999999) . $email) ;
     $query = "INSERT INTO users (first_name,last_name,email,pwd,token) VALUES (:first_name,:last_name,:email,:pwd,:token);";
-
+        
     $statment = $pdo->prepare($query);
 
     $statment->bindParam(":first_name",$first_name);
